@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<body>
+<label>Enter the value for DateTime object: </label>
+<input id="datetime">
+<br>
+<button onclick="myFunction()" ><b>Submit</b></button>
+<br>
+<p id="display"></p>
+
+<script>
+var d,date,date1,str,pos,val,year,mon,day,year1,mon1,day1,hour,min,sec;
+var hour1,min1,sec1;
+ 
+function myFunction()
+{
+var str,hour,min,sec,hour1,min1,sec1,text1,sec2,min2,hour2,z,d,qtr,qtr1,qtr2,year,mon,day,year1,mon1,day1,val;
+
+d = new Date();
+str = document.getElementById("datetime").value;
+
+ date1 = d.getDate() + "-" +( d.getMonth() + 1) + "-"+d.getFullYear();
+ str = document.getElementById("datetime").value;
+ date = str.slice(0,10);
+ val = date1.search("date");
+if(val == 0)
+{
+day1 =  d.getDate();
+mon1 =  d.getMonth() + 1;
+year1 = d.getFullYear();
+day = str.slice(0,2);
+mon = str.slice(3,5);
+year = str.slice(6,10);
+text1 = "0";
+if(day1<10)
+{day2 = text1.concat(day1);
+ day1=day2;}
+if(mon1<10)
+{mon2 = text1.concat(mon1);
+    mon1=mon2;}
+if(year1<10)
+{year2 = year1.concat(year1);
+ year1=year2;}
+
+function yearly()
+{
+if(year1>year){
+z = year1-year;
+return z;}
+else  {
+return 0;}
+}
+
+function monly()
+{
+if(mon1>mon){
+z = mon1-mon;
+return z;
+}
+else if(mon1 == mon){ 
+ return 0;
+ }
+else{ 
+z = 12 - mon;
+z = z + mon1;
+return z;
+}
+}
+
+function dayly()
+{
+if(day1>day){
+z = day1-day;
+return z;
+}
+else if(day1 == day){
+return 0;}
+else {
+z = 30 - day;
+z = z + day1;
+return z;}
+}
+
+qtr1 = yearly();
+qtr2 = monly();
+qtr = dayly();
+if(qtr1 == 0){
+            if(qtr2 == 0){
+	            
+                document.getElementById("display").innerHTML = qtr + " day ago";
+	  
+	        }
+			else{
+                    if((qtr == 0) || (day1>day) ){document.getElementById("display").innerHTML = qtr2 + " months ago";} 
+                    else if((qtr2-1) == 0){document.getElementById("display").innerHTML = qtr +" days ago";}
+					
+                    else { qtr2 = qtr2 - 1; document.getElementById("display").innerHTML = qtr2 + " months ago"; }      
+                }       
+    
+}
+else{
+           if((qtr1-1) == 0){
+		        if((qtr2 == 0 && qtr == 0) ||(mon1>mon) ){document.getElementById("display").innerHTML =  qtr1 +  " year ago";  }
+                else { 
+		              
+		              if((qtr == 0) || (day1>day)){document.getElementById("display").innerHTML = qtr2 + " months ago"; }
+                      else{qtr2 = qtr2 - 1;document.getElementById("display").innerHTML = qtr2 + " months ago";} 
+                }
+            }
+	        else {
+			    
+               if((qtr2 == 0 && qtr == 0) || (mon1>mon)){document.getElementById("display").innerHTML =  qtr1 +  " years ago";}
+               
+			   else{ qtr1 = qtr1 - 1;document.getElementById("display").innerHTML = qtr1 +  " years ago"; } 
+            }
+               
+ 
+               
+}  
+}
+else
+{
+hour = str.slice(11,13);
+min = str.slice(14,16);
+sec = str.slice(17,19);
+hour1 = d.getHours();
+min1 = d.getMinutes();
+sec1 = d.getSeconds();
+text1 = "0";
+if(sec1<10)
+{sec2 = text1.concat(sec1);
+ sec1=sec2;}
+if(min1<10)
+{min2 = text1.concat(min1);
+    min1=min2;}
+if(hour1<10)
+{hour2 = hour1.concat(hour1);
+ hour1=hour2;}
+
+function hourly()
+{
+if(hour1>hour){
+z = hour1-hour;
+return z;}
+else  {
+return 0;}
+}
+
+function minly()
+{
+if(min1>min){
+z = min1-min;
+return z;
+}
+else if(min1 == min){ 
+ return 0;
+ }
+else{ 
+z = 60-min;
+z = z + min1;
+return z;
+}
+}
+
+function secly()
+{
+if(sec1>sec){
+z = sec1-sec;return z;}
+else if(sec1 == sec) {
+return 0;}
+else {
+z = (60 - sec) + sec1;
+return z;}
+}
+
+qtr1 = hourly();
+qtr2 = minly();
+qtr = secly();
+if(qtr1 == 0){
+            if(qtr2 == 0){
+	            
+                document.getElementById("display").innerHTML = qtr + " seconds ago";
+	  
+	        }
+			else{
+                    if((qtr == 0) || (sec1>sec)){document.getElementById("display").innerHTML = qtr2 + " minutes ago";} 
+                    else if((qtr2-1) == 0){document.getElementById("display").innerHTML = qtr +" seconds ago";}
+                    else { qtr2 = qtr2 - 1;document.getElementById("display").innerHTML = qtr2 + " minutes ago"; }      
+                }       
+    
+}
+else{
+           if((qtr1-1) == 0){
+		        if((qtr2 == 0 && qtr == 0) ||(min1>min) ){document.getElementById("display").innerHTML =  qtr1 +  " hours ago";  }
+                else { 
+		              
+		              if((qtr == 0) || (sec1>sec2)){document.getElementById("display").innerHTML = qtr2 + " minutes ago"; }
+                      else{qtr2 = qtr2 - 1;document.getElementById("display").innerHTML = qtr2 + " minutes ago";} 
+                }
+            }
+	        else {
+			    
+               if((qtr2 == 0 && qtr == 0) || (min1>min)){document.getElementById("display").innerHTML =  qtr1 +  " hours ago";}
+               
+			   else{ qtr1 = qtr1 - 1;document.getElementById("display").innerHTML = qtr1 +  " hours ago"; } 
+            }
+               
+ 
+               
+}  
+
+ 
+ 
+ 
+ 
+}
+
+
+}
+
+</script>
+
+</body>
+</html>
+
